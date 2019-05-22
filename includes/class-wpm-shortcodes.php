@@ -18,6 +18,8 @@ class WPM_Shortcodes {
 	 */
 	public function __construct() {
 		add_shortcode( 'wpm_lang_switcher', array( $this, 'language_switcher' ) );
+		add_shortcode( 'wp_translate', array( $this,'WP_Translate_shortcode') );
+        add_shortcode( 'wpm_translate', array( $this,'wpm_translate_string_shortcode' ));
 	}
 
 	/**
@@ -36,4 +38,36 @@ class WPM_Shortcodes {
 
 		return wpm_get_language_switcher( $atts['type'], $atts['show'] );
 	}
+	
+	/**
+	 * Language get translate string form default language
+	 *
+	 * @param $atts    string
+	 * @param $content string
+	 *
+	 * @return string
+	 */
+        
+     public function WP_Translate_shortcode( $atts, $content = null ) {
+               extract(shortcode_atts( array(
+                                            'domain' => 'default',
+                                            ), $atts ));
+               return __($content,$domain);
+     }
+        
+    /**
+	 * wpm_translate_string by shortcode
+	 *
+	 * @param $atts string
+	 *
+	 * @return string
+	 */
+        
+     public function wpm_translate_string_shortcode( $atts, $content = null ) {
+               extract(shortcode_atts( array(
+                                              'domain' => 'default',
+                                             ), $atts ));
+
+               return wpm_translate_string($content);
+     }
 }
