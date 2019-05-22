@@ -52,7 +52,6 @@ class WPM_Shortcodes {
                                               'domain' => 'default',
                                              ), $atts ));
                return __($content,$domain);
-               //return esc_html(wpm_translate_string($content));
      }
         
      /**
